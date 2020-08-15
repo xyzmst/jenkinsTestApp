@@ -28,6 +28,25 @@ android {
         }
     }
 
+    flavorDimensions "market"
+    productFlavors {
+        xiaomi {
+            dimension "market"
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "xiaomi"]
+        }
+        wandoujia {
+            dimension "market"
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "wandoujia"]
+        }
+
+    }
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            outputFileName = variant.productFlavors[0].name + new Date().format('yyyyMMddHHmmss') + '-' + variant.buildType.name + '.apk'
+        }
+    }
+
+
     buildTypes {
         debug {
             signingConfig signingConfigs.release
