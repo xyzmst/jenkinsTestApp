@@ -13,9 +13,27 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    signingConfigs {
+        debug {
+            storeFile rootProject.file("me.jks")        //证书存放目录
+            storePassword "123456"                               //密码
+            keyAlias "key0"                                                //别名
+            keyPassword "123456"                                //密码(就是设置证书那两个密码，建议都填一样的)
+        }
+        release {
+            storeFile rootProject.file("me.jks")        //证书存放目录
+            storePassword "123456"                               //密码
+            keyAlias "key0"                                                //别名
+            keyPassword "123456"                                //密码(就是设置证书那两个密码，建议都填一样的)
+        }
+    }
 
     buildTypes {
+        debug {
+            signingConfig signingConfigs.release
+        }
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
